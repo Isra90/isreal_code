@@ -171,6 +171,8 @@ int returnWordLength(char *word){
     while(next_char != '\0'){
         word_index++;
         next_char = word[word_index];
+        //subtract out the null terminotor
+        if(next_char == '\0') word_index--;
     }
     return word_index;
 }
