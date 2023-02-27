@@ -148,7 +148,7 @@ int read_line(ifstream &infile, char words_in_sentence[SIZE][SIZE])
         //Written question 1 asks about this loop
         while (!infile.eof() && isalpha(next_char)) {
             //Written question 2 asks about the line below
-            next_word[spot] = tolower(next_char);
+            next_word[spot] = next_char;//tolower(next_char);
             ++spot;
             infile.get(next_char);
         }
