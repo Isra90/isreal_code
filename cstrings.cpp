@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
                 //cout<<words[i]<<" ";   
             }
             //cout<<"\n new line starts here"<<endl;
-            cout<<is_equal(words[0],words[0])<<"\n";
+            cout<<is_prefix(words[12],words[13])<<"\n";
         /* DO NOT MODIFY THE CODE IN main() ABOVE OR BELOW THIS COMMENT BLOCK */
 
         //Read the next line from the file
@@ -84,9 +84,22 @@ bool is_equal(char *word1, char *word2)
  */
 bool is_prefix(char *word1, char *word2)
 {
-    /* YOUR CODE GOES HERE. DELETE THE RETURN STATEMENT BELOW WHEN YOU'RE
-    * WORKING ON THIS FUNCTION. */
-    return false;
+    
+    cout<<word1<<" \n";
+    cout<<word2<<" \n";
+
+    int wCount1 = returnWordLength(word1);
+    int wCount2 = returnWordLength(word2);
+    //return false word2 is bigger than word1
+    if(wCount1<wCount2)  return false;
+
+    for(int i=0;i<wCount2;i++){
+        if(word1[i] != word2[i]){
+            return false;
+        }
+   }
+    return true;
+
 }
 
 /* find_substring
