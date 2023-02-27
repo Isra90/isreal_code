@@ -1,0 +1,3 @@
+It is not very very hard to find every substring of any stringy string!
+Guero is cute
+hector is a hippie
