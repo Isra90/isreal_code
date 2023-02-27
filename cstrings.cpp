@@ -10,6 +10,7 @@ int read_line(ifstream &infile, char words[SIZE][SIZE]);
 bool is_equal(char *word1, char *word2);
 bool is_prefix(char *word1, char *word2);
 char *find_substring(char *haystack, char *needle);
+int returnWordLength(char *word);
 
 int main(int argc, char *argv[])
 {
@@ -39,7 +40,7 @@ int main(int argc, char *argv[])
                 //cout<<words[i]<<" ";   
             }
             //cout<<"\n new line starts here"<<endl;
-            is_equal(words[0],words[1]);
+            cout<<is_equal(words[0],words[0])<<"\n";
         /* DO NOT MODIFY THE CODE IN main() ABOVE OR BELOW THIS COMMENT BLOCK */
 
         //Read the next line from the file
@@ -59,12 +60,21 @@ int main(int argc, char *argv[])
  */
 bool is_equal(char *word1, char *word2)
 {
-    cout<<word1<<" \n";
-    cout<<word2<<" \n\n";
+    //cout<<word1<<" \n";
+    //cout<<word2<<" \n\n";
+
+    int wCount1 = returnWordLength(word1);
+    int wCount2 = returnWordLength(word2);
+    //check if they have the same charactors
+    if(wCount1 != wCount2)return false;
     
-    /* YOUR CODE GOES HERE. DELETE THE RETURN STATEMENT BELOW WHEN YOU'RE
-    * WORKING ON THIS FUNCTION. */
-    return false;
+    /* safe to assume they are the same length */
+   for(int i=0;i<wCount1;i++){
+        if(word1[i] != word2[i]){
+            return false;
+        }
+   }
+    return true;
 }
 
 /* is_prefix
@@ -136,6 +146,18 @@ int read_line(ifstream &infile, char words_in_sentence[SIZE][SIZE])
         } else {
             infile.get(next_char);
         }
+    }
+    return word_index;
+}
+
+int returnWordLength(char *word){
+    char next_char;
+    int word_index = 0;
+    next_char = word[word_index];
+
+    while(next_char != '\0'){
+        word_index++;
+        next_char = word[word_index];
     }
     return word_index;
 }
