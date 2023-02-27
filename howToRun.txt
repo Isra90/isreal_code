@@ -1,0 +1,3 @@
+
+g++ -o cstrings -Wall -Wextra cstrings.cpp
+./cstrings myTest.txt
