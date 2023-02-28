@@ -37,10 +37,19 @@ int main(int argc, char *argv[])
         /* DO NOT MODIFY THE CODE IN main() ABOVE OR BELOW THIS COMMENT BLOCK */
                         //code goes here
             for(int i = 0;i <total_words; i++){
-                //cout<<words[i]<<" ";   
+                //cout<<words[i]<<" ";
+                char *word1 = words[i];
+                for(int j = 0;j <total_words; j++){
+                    char *word2 = words[j];
+                    //cant campare the words
+                    if(is_equal(word1,word2)==0){
+                        
+                    }
+                }
+
             }
             //cout<<"\n new line starts here"<<endl;
-            cout<<is_prefix(words[12],words[13])<<"\n";
+            //cout<<is_prefix(words[12],words[13])<<"\n";
         /* DO NOT MODIFY THE CODE IN main() ABOVE OR BELOW THIS COMMENT BLOCK */
 
         //Read the next line from the file
