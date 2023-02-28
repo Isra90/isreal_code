@@ -43,7 +43,9 @@ int main(int argc, char *argv[])
                     char *word2 = words[j];
                     //cant campare the words
                     if(is_equal(word1,word2)==0){
-                        
+                        char * charptr;
+                        find_substring(word2,word1);
+
                     }
                 }
 
@@ -94,19 +96,28 @@ bool is_equal(char *word1, char *word2)
 bool is_prefix(char *word1, char *word2)
 {
     
-    cout<<word1<<" \n";
-    cout<<word2<<" \n";
+    //cout<<word1<<" \n";
+    //cout<<word2<<" \n";
 
-    int wCount1 = returnWordLength(word1);
-    int wCount2 = returnWordLength(word2);
+    //int wCount1 = returnWordLength(word1);
+    //int wCount2 = returnWordLength(word2);
     //return false word2 is bigger than word1
-    if(wCount1<wCount2)  return false;
-
+    //if(wCount1<wCount2)  return false;
+    /*
     for(int i=0;i<wCount2;i++){
         if(word1[i] != word2[i]){
             return false;
         }
-   }
+    }*/
+    char *w1 = word1;
+    char *w2 = word2;
+    while(*w2  != '\0'){
+        if(&w2 != &w1){
+            return false;
+        }
+        w2++;
+        w1++;
+    }
     return true;
 
 }
@@ -121,6 +132,19 @@ bool is_prefix(char *word1, char *word2)
  */
 char *find_substring(char *haystack, char *needle)
 {
+    //cout<<" haystack "<<haystack<<"\n";
+    //cout<<" needle "<<needle<<"\n";
+    char *fullHaystack = haystack;
+    
+    while(*haystack != '\0'){
+        //cout<<haystack<<"\n";
+        if(is_prefix(haystack,needle)==1){
+            cout<<needle<<" is a substring of "<<fullHaystack<<"\n";
+            cout<<" pointer "<<haystack<<"\n";
+        }
+        haystack++;
+    }
+
     /* YOUR CODE GOES HERE. DELETE THE RETURN STATEMENT BELOW WHEN YOU'RE
     * WORKING ON THIS FUNCTION. */
     return nullptr;
