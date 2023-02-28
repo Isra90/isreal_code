@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
                     char *word2 = words[j];
                     //cant campare the same words
                     if(is_equal(word1,word2)==0){
-                        char * charptr;
+                        //char * charptr;
                         find_substring(word2,word1);
 
                     }
