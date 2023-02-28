@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
                 char *word1 = words[i];
                 for(int j = 0;j <total_words; j++){
                     char *word2 = words[j];
-                    //cant campare the words
+                    //cant campare the same words
                     if(is_equal(word1,word2)==0){
                         
                     }
