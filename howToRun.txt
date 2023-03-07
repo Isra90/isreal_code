@@ -1,3 +1,7 @@
 
 g++ -o cstrings -Wall -Wextra cstrings.cpp
 ./cstrings myTest.txt
+
+g++ -o phone_tree -Wall -Wextra phone_tree.cpp
+
+./phone_demo parents1.in
