@@ -8,6 +8,7 @@ struct Student {
     string name;
     string time;
     bool printed;
+    string rPartner;
     Student *partner;
 };
 
@@ -86,6 +87,7 @@ void match_students(Student *students, int num_students) {
 //         the heap. 
 Student *read_students(string filename, int *num_students) {
     *num_students = count_students(filename);
+    //cout<<"the total students are: "<< *num_students<< "\n";
     Student *students = new Student[*num_students];
     
     ifstream infile(filename.c_str());
@@ -97,11 +99,16 @@ Student *read_students(string filename, int *num_students) {
     
     string name;
     string time;
+    string partner;
+    string skip;
+    //need to skip the first line
+    infile >>skip;
     for (int i = 0; i < *num_students; i++) {
-        infile >> name >> time;
+        infile >> name >> time >> partner;
         students[i].name = name;
         students[i].time = time;
         students[i].partner = nullptr;
+        students[i].rPartner = partner;
         students[i].printed = false;
     }
     infile.close();
@@ -123,12 +130,10 @@ int count_students(string filename) {
     }
     
     int student_count = 0;
-    string skip; // Purely used to read over strings in the file
-    infile >> skip >> skip; // Two strings on each line
-    while (!infile.eof()) {
-        student_count++;
-        infile >> skip >> skip;
-    }
+    //first line is the total students
+    infile >> student_count;
+    //cout<<student_count<<"\n";
+
     infile.close();
     
     return student_count;
