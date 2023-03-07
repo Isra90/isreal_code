@@ -66,6 +66,16 @@ void print_pairings(Student *students, int num_students) {
 //         students array.
 void match_students(Student *students, int num_students) {
     for (int i = 0; i < num_students; i++) {
+
+        //cout<<"the name: "<<students[i].name << " the partner is "<< students[i].rPartner<< " and the time is: "<< students[i].time<<"\n";
+        for (int j = 0; j < num_students; j++){
+            if(students[i].rPartner == students[j].name){
+                students[i].partner = &students[j];
+                break;
+            }
+        }
+
+        /*
         if (students[i].partner != nullptr) {
             continue;
         }
@@ -77,6 +87,7 @@ void match_students(Student *students, int num_students) {
                 break;
             }
         }
+        */
     }
 }
 
