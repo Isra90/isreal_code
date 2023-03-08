@@ -5,10 +5,10 @@
 using namespace std;
 
 struct Student {
-    string name;
-    string time;
-    bool printed;
-    string rPartner;
+    string caller;
+    int time;
+    bool isFirst;
+    string callee;
     Student *partner;
 };
 
@@ -44,7 +44,15 @@ int main(int argc, char *argv[]) {
 // Description: Print the pairings between students (or the lack thereof).
 // Output: A message printed with cout.
 void print_pairings(Student *students, int num_students) {
+    int total_time = 0;
     for (int i = 0; i < num_students; i++) {
+        /*
+        //get all the time
+        total_time = total_time + students[i].time;
+        cout<<"the name: "<<students[i].caller 
+        << " the partner is "<< students[i].callee
+        << " and the time is: "<< students[i].time<<endl;
+    
         if (students[i].partner != nullptr) {
             if (!students[i].printed) {
                 cout << students[i].name << " - " 
@@ -54,9 +62,13 @@ void print_pairings(Student *students, int num_students) {
                 students[i].partner->printed = true;
             }
         } else {
+            cout<<"i am here"<<endl;
             cout << students[i].name << " (No Partner)" << endl;
         }
+        */
     }
+
+    cout<<"the out time is "<<total_time<<endl;
 }
 
 // match_students
@@ -69,7 +81,7 @@ void match_students(Student *students, int num_students) {
 
         //cout<<"the name: "<<students[i].name << " the partner is "<< students[i].rPartner<< " and the time is: "<< students[i].time<<"\n";
         for (int j = 0; j < num_students; j++){
-            if(students[i].rPartner == students[j].name){
+            if(students[i].caller == students[j].callee){
                 students[i].partner = &students[j];
                 break;
             }
@@ -78,14 +90,14 @@ void match_students(Student *students, int num_students) {
         /*
         if (students[i].partner != nullptr) {
             continue;
-        }
+    }
         
         for (int j = i + 1; j < num_students; j++) {
             if (students[i].time == students[j].time) {
                 students[i].partner = &students[j];
                 students[j].partner = &students[i];
                 break;
-            }
+        }
         }
         */
     }
@@ -109,18 +121,18 @@ Student *read_students(string filename, int *num_students) {
     }
     
     string name;
-    string time;
+    int time;
     string partner;
     string skip;
     //need to skip the first line
     infile >>skip;
     for (int i = 0; i < *num_students; i++) {
         infile >> name >> time >> partner;
-        students[i].name = name;
+        students[i].caller = name;
         students[i].time = time;
         students[i].partner = nullptr;
-        students[i].rPartner = partner;
-        students[i].printed = false;
+        students[i].callee = partner;
+        students[i].isFirst = false;
     }
     infile.close();
     
