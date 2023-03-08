@@ -45,30 +45,26 @@ int main(int argc, char *argv[]) {
 // Output: A message printed with cout.
 void print_pairings(Student *students, int num_students) {
     int total_time = 0;
+    Student *myCallerList = nullptr;
+    //Student *myCallerList = new Student[num_students];
+    //tells first person
     for (int i = 0; i < num_students; i++) {
-        /*
-        //get all the time
-        total_time = total_time + students[i].time;
-        cout<<"the name: "<<students[i].caller 
-        << " the partner is "<< students[i].callee
-        << " and the time is: "<< students[i].time<<endl;
-    
-        if (students[i].partner != nullptr) {
-            if (!students[i].printed) {
-                cout << students[i].name << " - " 
-                     << students[i].partner->name << endl;
-                     
-                students[i].printed = true;
-                students[i].partner->printed = true;
-            }
-        } else {
-            cout<<"i am here"<<endl;
-            cout << students[i].name << " (No Partner)" << endl;
+        if (students[i].partner == nullptr){
+                cout<< students[i].caller<<endl;
+                myCallerList = &students[i];
         }
-        */
+        if (students[i].isFirst != true){
+            total_time = total_time + students[i].time;
+        }
     }
 
-    cout<<"the out time is "<<total_time<<endl;
+        
+    if(myCallerList != nullptr){
+        cout<<"first person to is "<<myCallerList[0].caller<<endl;
+        cout<<"the out time is "<<total_time<<endl;
+    }else{
+        cout<<"Damn you Harold"<<endl;
+    }
 }
 
 // match_students
@@ -77,8 +73,8 @@ void print_pairings(Student *students, int num_students) {
 // Output: Potentially modifies the 'partner' field of elements of the 
 //         students array.
 void match_students(Student *students, int num_students) {
+    //thjis loop sets the pointer 
     for (int i = 0; i < num_students; i++) {
-
         //cout<<"the name: "<<students[i].name << " the partner is "<< students[i].rPartner<< " and the time is: "<< students[i].time<<"\n";
         for (int j = 0; j < num_students; j++){
             if(students[i].caller == students[j].callee){
@@ -86,20 +82,18 @@ void match_students(Student *students, int num_students) {
                 break;
             }
         }
-
-        /*
-        if (students[i].partner != nullptr) {
-            continue;
     }
-        
-        for (int j = i + 1; j < num_students; j++) {
-            if (students[i].time == students[j].time) {
-                students[i].partner = &students[j];
-                students[j].partner = &students[i];
-                break;
+
+    //this loop sets if it should be counted
+    
+    for (int i = 0; i < num_students; i++){
+        for (int j = 0; j < num_students; j++){
+            if(i != j){
+                if(students[i].callee == students[j].callee && students[i].isFirst != true ){
+                    students[j].isFirst =  true;
+                }
+            }
         }
-        }
-        */
     }
 }
 
