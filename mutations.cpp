@@ -19,7 +19,7 @@ struct Gene {
 struct Mutation {
     string m_name;
     int energy_received;
-    Mutation *receiver;
+    //Mutation *receiver;
 };
 
 int main(int argc, char *argv[]) {
@@ -33,12 +33,19 @@ int main(int argc, char *argv[]) {
     int num_genes;
     Gene *genes = read_mutations(argv[1], &num_genes);
 
-    //
+    //test out the data structures
+    /*
    for (int i = 0; i < num_genes; i++){
     cout<< genes[i].g_name<<endl;
     cout<<genes[i].total_mutations<<endl;
-    cout<<"_______________"<<endl;
+    cout<<"______the data for mutations_________"<<endl;
+        for(int j =0; j < genes[i].total_mutations; j++){
+            cout<<genes[i].receiver[j].m_name<<endl;
+            cout<<genes[i].receiver[j].energy_received<<endl;
+        }
+        cout<<"**************** end ***********************";
    }
+   */
 
 
 }
@@ -63,14 +70,22 @@ Gene *read_mutations(string filename, int *num_gene_p) {
 
     string firstGene;
     int num_mutations_p;
-    Mutation partner;
 
     for (int i = 0; i < *num_gene_p; i++) {
         infile >> firstGene >> num_mutations_p;
         genes[i].g_name = firstGene;
         genes[i].total_mutations = num_mutations_p;
-        //cout << infile <<endl;
-
+        //cout << "gene "<<firstGene<<" total mutation "<<num_mutations_p <<endl;
+        string MutationName;
+        int energy;
+        Mutation *mutations = new Mutation[num_mutations_p];
+        for(int j =0; j < num_mutations_p; j++){
+            infile >> MutationName >> energy;
+            //cout<< "energy: "<< energy<< " and the name is "<< MutationName<<endl;
+            mutations[j].m_name = MutationName;
+            mutations[j].energy_received = energy;
+        }
+        genes[i].receiver = mutations;
     }
     infile.close();
     
