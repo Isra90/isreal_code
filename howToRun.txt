@@ -5,3 +5,8 @@ g++ -o cstrings -Wall -Wextra cstrings.cpp
 g++ -o phone_tree -Wall -Wextra phone_tree.cpp
 
 ./phone_demo parents1.in
+
+
+g++ -o mutation_demo -Wall -Wextra mutations.cpp
+
+./mutation_demo sampleA.data
