@@ -11,6 +11,7 @@ Gene *read_mutations(string filename, int *num_gene_p);
 int count_students(string filename);
 int print_file(Gene * genes, int num_genes);
 int check_genes(Gene * genes, int num_genes, string source, string target);
+int check_energy(Gene * genes, int num_genes, string source, string target, int energy);
 
 struct Gene {
     string g_name;
@@ -46,13 +47,24 @@ int main(int argc, char *argv[]) {
     
     if(userInput == "p") print_file(genes, num_genes);
 
-    if(userInput == "m" || userInput == "m") {
+    if(userInput == "m") {
         string source;
         string target;
         cin>> source;
         cin>> target;
         //cout<< "target " <<target<< " and source "<<source<<endl;
-        if(userInput == "m") check_genes(genes, num_genes, target, source);
+        check_genes(genes, num_genes, target, source);
+    }
+
+    if(userInput == "me") {
+        string source;
+        string target;
+        int energy;
+        cin>> source;
+        cin>> target;
+        cin>>energy;
+        //cout<< "target " <<target<< " and source "<<source<<endl;
+        check_energy(genes, num_genes, target, source, energy);
     }
 
     cout << "Enter Another query prompt ";
@@ -63,6 +75,31 @@ int main(int argc, char *argv[]) {
    cout<<"query ended!" <<endl;
 
 }
+
+int check_energy(Gene * genes, int num_genes, string source, string target, int energy){
+    bool mutationFound = false;
+    for (int i = 0; i < num_genes; i++){
+        //cout<< genes[i].g_name <<" "<<genes[i].total_mutations<<" ";
+        if(genes[i].g_name == source){
+            for(int j =0; j < genes[i].total_mutations; j++){
+                if(genes[i].receiver[j].m_name == target && energy >= genes[i].receiver[j].energy_received  ){
+                    mutationFound = true;
+                }
+                //cout<<genes[i].receiver[j].m_name<<" ";
+                //cout<<genes[i].receiver[j].energy_received<<" ";
+            }
+            //cout<<endl;
+        }
+   }
+
+   if(mutationFound == 1){
+    cout<< "mutation can happen"<<endl;
+   }else{
+    cout<< "mutation can NOT happen"<<endl;
+   }
+    return 0;
+}
+
 
 int check_genes(Gene * genes, int num_genes, string source, string target){
     bool mutationFound = false;
