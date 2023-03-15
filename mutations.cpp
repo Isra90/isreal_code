@@ -9,6 +9,7 @@ struct Gene;
 
 Gene *read_mutations(string filename, int *num_gene_p);
 int count_students(string filename);
+int print_file(Gene * genes, int num_genes);
 
 struct Gene {
     string g_name;
@@ -33,21 +34,37 @@ int main(int argc, char *argv[]) {
     int num_genes;
     Gene *genes = read_mutations(argv[1], &num_genes);
 
-    //test out the data structures
-    /*
-   for (int i = 0; i < num_genes; i++){
-    cout<< genes[i].g_name<<endl;
-    cout<<genes[i].total_mutations<<endl;
-    cout<<"______the data for mutations_________"<<endl;
-        for(int j =0; j < genes[i].total_mutations; j++){
-            cout<<genes[i].receiver[j].m_name<<endl;
-            cout<<genes[i].receiver[j].energy_received<<endl;
-        }
-        cout<<"**************** end ***********************";
+    //now get user info
+    char userInput;
+   cout << "Enter query prompt ";
+   cin >> userInput;
+
+   //cout<<"user input is "<< userInput <<endl;
+
+   while(userInput != 'q'){
+    
+    if(userInput == 'p') print_file(genes, num_genes);
+
+    cout << "Enter Another query prompt ";
+    cin >> userInput;    
+    cout<<"user input is "<< userInput <<endl;
+
    }
-   */
+   cout<<"query ended!" <<endl;
+
+}
 
 
+int print_file(Gene * genes, int num_genes){
+    for (int i = 0; i < num_genes; i++){
+    cout<< genes[i].g_name <<" "<<genes[i].total_mutations<<" ";
+        for(int j =0; j < genes[i].total_mutations; j++){
+            cout<<genes[i].receiver[j].m_name<<" ";
+            cout<<genes[i].receiver[j].energy_received<<" ";
+        }
+        cout<<endl;
+   }
+    return 0;
 }
 
 Gene *read_mutations(string filename, int *num_gene_p) {
