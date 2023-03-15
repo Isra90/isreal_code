@@ -10,7 +10,7 @@ struct Gene;
 Gene *read_mutations(string filename, int *num_gene_p);
 int count_students(string filename);
 int print_file(Gene * genes, int num_genes);
-int check_genes(Gene * genes, int num_genes, string userInput);
+int check_genes(Gene * genes, int num_genes, string source, string target);
 
 struct Gene {
     string g_name;
@@ -51,7 +51,8 @@ int main(int argc, char *argv[]) {
         string target;
         cin>> source;
         cin>> target;
-        cout<< "target " <<target<< " and source "<<source<<endl;
+        //cout<< "target " <<target<< " and source "<<source<<endl;
+        if(userInput == "m") check_genes(genes, num_genes, target, source);
     }
 
     cout << "Enter Another query prompt ";
@@ -63,18 +64,29 @@ int main(int argc, char *argv[]) {
 
 }
 
-int print_file(Gene * genes, int num_genes, string userInput){
+int check_genes(Gene * genes, int num_genes, string source, string target){
+    bool mutationFound = false;
     for (int i = 0; i < num_genes; i++){
-    cout<< genes[i].g_name <<" "<<genes[i].total_mutations<<" ";
-        for(int j =0; j < genes[i].total_mutations; j++){
-            cout<<genes[i].receiver[j].m_name<<" ";
-            cout<<genes[i].receiver[j].energy_received<<" ";
+        //cout<< genes[i].g_name <<" "<<genes[i].total_mutations<<" ";
+        if(genes[i].g_name == source){
+            for(int j =0; j < genes[i].total_mutations; j++){
+                if(genes[i].receiver[j].m_name == target){
+                    mutationFound = true;
+                }
+                //cout<<genes[i].receiver[j].m_name<<" ";
+                //cout<<genes[i].receiver[j].energy_received<<" ";
+            }
+            //cout<<endl;
         }
-        cout<<endl;
+   }
+
+   if(mutationFound == 1){
+    cout<< "mutation exists"<<endl;
+   }else{
+    cout<< "mutation does NOT exists"<<endl;
    }
     return 0;
 }
-
 
 int print_file(Gene * genes, int num_genes){
     for (int i = 0; i < num_genes; i++){
