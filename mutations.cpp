@@ -10,6 +10,7 @@ struct Gene;
 Gene *read_mutations(string filename, int *num_gene_p);
 int count_students(string filename);
 int print_file(Gene * genes, int num_genes);
+int check_genes(Gene * genes, int num_genes, string userInput);
 
 struct Gene {
     string g_name;
@@ -45,6 +46,14 @@ int main(int argc, char *argv[]) {
     
     if(userInput == "p") print_file(genes, num_genes);
 
+    if(userInput == "m" || userInput == "m") {
+        string source;
+        string target;
+        cin>> source;
+        cin>> target;
+        cout<< "target " <<target<< " and source "<<source<<endl;
+    }
+
     cout << "Enter Another query prompt ";
     cin >> userInput;    
     //cout<<"user input is "<< userInput <<endl;
@@ -52,6 +61,18 @@ int main(int argc, char *argv[]) {
    }
    cout<<"query ended!" <<endl;
 
+}
+
+int print_file(Gene * genes, int num_genes, string userInput){
+    for (int i = 0; i < num_genes; i++){
+    cout<< genes[i].g_name <<" "<<genes[i].total_mutations<<" ";
+        for(int j =0; j < genes[i].total_mutations; j++){
+            cout<<genes[i].receiver[j].m_name<<" ";
+            cout<<genes[i].receiver[j].energy_received<<" ";
+        }
+        cout<<endl;
+   }
+    return 0;
 }
 
 
