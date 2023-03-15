@@ -38,7 +38,7 @@ int main(int argc, char *argv[]) {
 
     //now get user info
     string userInput;
-   cout << "Enter query prompt ";
+   cout << "Enter a query: ";
    cin >> userInput;
 
    //cout<<"user input is "<< userInput <<endl;
@@ -47,7 +47,7 @@ int main(int argc, char *argv[]) {
     
     if(userInput == "p") print_file(genes, num_genes);
 
-    if(userInput == "m") {
+    else if(userInput == "m") {
         string source;
         string target;
         cin>> source;
@@ -56,7 +56,7 @@ int main(int argc, char *argv[]) {
         check_genes(genes, num_genes, target, source);
     }
 
-    if(userInput == "me") {
+    else if(userInput == "me") {
         string source;
         string target;
         int energy;
@@ -67,12 +67,14 @@ int main(int argc, char *argv[]) {
         check_energy(genes, num_genes, target, source, energy);
     }
 
-    cout << "Enter Another query prompt ";
+    else cout<< userInput<<" not recognized."<<endl;
+    
+    cout << "Enter a query: ";
     cin >> userInput;    
     //cout<<"user input is "<< userInput <<endl;
 
    }
-   cout<<"query ended!" <<endl;
+   //cout<<"query ended!" <<endl;
 
 }
 
@@ -93,9 +95,9 @@ int check_energy(Gene * genes, int num_genes, string source, string target, int 
    }
 
    if(mutationFound == 1){
-    cout<< "mutation can happen"<<endl;
+    cout<< target<< " can mutation into "<< source<<" with an evolutionary cost "<<energy<<endl;
    }else{
-    cout<< "mutation can NOT happen"<<endl;
+     cout<< target<< " can mutation into "<< source<<" but not with an evolutionary cost "<<energy<<endl;
    }
     return 0;
 }
@@ -106,7 +108,7 @@ int check_genes(Gene * genes, int num_genes, string source, string target){
     for (int i = 0; i < num_genes; i++){
         //cout<< genes[i].g_name <<" "<<genes[i].total_mutations<<" ";
         if(genes[i].g_name == source){
-            for(int j =0; j < genes[i].total_mutations; j++){
+            for(int j=0; j < genes[i].total_mutations; j++){
                 if(genes[i].receiver[j].m_name == target){
                     mutationFound = true;
                 }
@@ -118,19 +120,19 @@ int check_genes(Gene * genes, int num_genes, string source, string target){
    }
 
    if(mutationFound == 1){
-    cout<< "mutation exists"<<endl;
+    cout<< target<< " can mutation into "<< source<<endl;
    }else{
-    cout<< "mutation does NOT exists"<<endl;
+    cout<< target<< " cannot mutation into "<< source<<endl;
    }
     return 0;
 }
 
 int print_file(Gene * genes, int num_genes){
     for (int i = 0; i < num_genes; i++){
-    cout<< genes[i].g_name <<" "<<genes[i].total_mutations<<" ";
+    cout<<"== " << genes[i].g_name <<" == "<< "\nMutations: "<<endl;
         for(int j =0; j < genes[i].total_mutations; j++){
-            cout<<genes[i].receiver[j].m_name<<" ";
-            cout<<genes[i].receiver[j].energy_received<<" ";
+            cout<<genes[i].receiver[j].m_name<<" - ";
+            cout<<"Cost: "<<genes[i].receiver[j].energy_received<<"\n";
         }
         cout<<endl;
    }
