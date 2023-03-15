@@ -53,7 +53,7 @@ int main(int argc, char *argv[]) {
         cin>> source;
         cin>> target;
         //cout<< "target " <<target<< " and source "<<source<<endl;
-        check_genes(genes, num_genes, target, source);
+        check_genes(genes, num_genes, source, target);
     }
 
     else if(userInput == "me") {
@@ -64,7 +64,7 @@ int main(int argc, char *argv[]) {
         cin>> target;
         cin>>energy;
         //cout<< "target " <<target<< " and source "<<source<<endl;
-        check_energy(genes, num_genes, target, source, energy);
+        check_energy(genes, num_genes, source, target, energy);
     }
 
     else cout<< userInput<<" not recognized."<<endl;
@@ -108,6 +108,7 @@ int check_genes(Gene * genes, int num_genes, string source, string target){
     for (int i = 0; i < num_genes; i++){
         //cout<< genes[i].g_name <<" "<<genes[i].total_mutations<<" ";
         if(genes[i].g_name == source){
+            cout<< genes[i].g_name <<" "<<genes[i].total_mutations<<" ";
             for(int j=0; j < genes[i].total_mutations; j++){
                 if(genes[i].receiver[j].m_name == target){
                     mutationFound = true;
