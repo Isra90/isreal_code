@@ -35,19 +35,19 @@ int main(int argc, char *argv[]) {
     Gene *genes = read_mutations(argv[1], &num_genes);
 
     //now get user info
-    char userInput;
+    string userInput;
    cout << "Enter query prompt ";
    cin >> userInput;
 
    //cout<<"user input is "<< userInput <<endl;
 
-   while(userInput != 'q'){
+   while(userInput != "q"){
     
-    if(userInput == 'p') print_file(genes, num_genes);
+    if(userInput == "p") print_file(genes, num_genes);
 
     cout << "Enter Another query prompt ";
     cin >> userInput;    
-    cout<<"user input is "<< userInput <<endl;
+    //cout<<"user input is "<< userInput <<endl;
 
    }
    cout<<"query ended!" <<endl;
