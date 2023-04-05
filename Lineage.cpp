@@ -158,3 +158,36 @@ int index_of(Gene *dna, string seq, int num_nodes)
     }
     return -1;
 }
+// evolution
+// Input: Pointer to array of genes, number of genes, source gene, and target gene.
+// Description: Checking if evolution is possible or not
+// Output: Source can or cannot evolve into target.
+bool evolution(Gene *genes, string src, string tgt, int num_genes)
+{
+    int 1 = 0;
+    Gene *new_source = check_existence(genes, num_genes, src, i);
+    string new_src;
+
+    if (new_source == nullptr)
+    {
+        return false;
+    }
+    else if (new_source->mut.target->sq == tgt)
+    {
+        return true;
+    }
+    else if (new_source->mut.target == true)
+    {
+        return false;
+    }
+    else if (new_source->seen == true)
+    {
+        return false;
+    }
+    else if (new_source->mut.target != nullptr)
+    {
+        new_source->seen = true;
+        new_src = new_source->mut.target->sq;
+    }
+    return evolution(genes, num_genes, new_src, tgt);
+}
